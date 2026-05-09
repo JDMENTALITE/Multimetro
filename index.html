@@ -1,0 +1,418 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía Básica del Multímetro Digital</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        tech: ['Rajdhani', 'sans-serif'],
+                    },
+                    colors: {
+                        dark: '#0a0f18',
+                        'electric-blue': '#00f0ff',
+                        'tech-yellow': '#ffcc00',
+                        'tech-red': '#ff3333',
+                        'tech-green': '#00ff66'
+                    },
+                    backgroundImage: {
+                        'circuit-pattern': "url(\"data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10h10v10H10V10zm20 0h10v10H30V10zm20 0h10v10H50V10zm20 0h10v10H70V10zm20 0h10v10H90V10zM10 30h10v10H10V30zm20 0h10v10H30V30zm20 0h10v10H50V30zm20 0h10v10H70V30zm20 0h10v10H90V30z' fill='%231f2937' fill-opacity='0.1' fill-rule='evenodd'/%3E\")",
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glow-text { text-shadow: 0 0 10px rgba(0, 240, 255, 0.7); }
+        .glow-box-blue { box-shadow: 0 0 20px rgba(0, 240, 255, 0.2); }
+        .glow-box-red { box-shadow: 0 0 20px rgba(255, 51, 51, 0.2); }
+        .glow-box-yellow { box-shadow: 0 0 20px rgba(255, 204, 0, 0.2); }
+        
+        .lcd-screen {
+            background: linear-gradient(135deg, #8ba888 0%, #7c9b78 100%);
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
+            font-family: 'Rajdhani', monospace;
+        }
+
+        /* Glassmorphism for labels */
+        .glass-label {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Connecting lines animation */
+        @keyframes dash {
+            to { stroke-dashoffset: 0; }
+        }
+        .animated-line {
+            stroke-dasharray: 10;
+            stroke-dashoffset: 100;
+            animation: dash 3s linear infinite;
+        }
+    </style>
+</head>
+<body class="bg-dark text-white font-sans antialiased bg-circuit-pattern min-h-screen selection:bg-electric-blue selection:text-black">
+
+    <!-- CONTENEDOR PRINCIPAL TIPO POSTER (9:16 approx) -->
+    <main class="max-w-2xl mx-auto bg-gradient-to-b from-gray-900 via-dark to-black shadow-2xl relative overflow-hidden border-x border-gray-800">
+        
+        <!-- DECORACIÓN DE FONDO -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+            <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[20%] bg-electric-blue rounded-full blur-[120px] opacity-20"></div>
+            <div class="absolute bottom-[20%] right-[-10%] w-[40%] h-[30%] bg-tech-red rounded-full blur-[150px] opacity-10"></div>
+            <div class="absolute top-[40%] left-[20%] w-[30%] h-[30%] bg-tech-yellow rounded-full blur-[150px] opacity-5"></div>
+        </div>
+
+        <div class="relative z-10 p-6 md:p-10">
+
+            <!-- 1. HEADER -->
+            <header class="text-center mb-12 mt-6">
+                <div class="inline-block px-4 py-1 rounded-full border border-electric-blue text-electric-blue text-sm font-bold tracking-widest mb-4 uppercase bg-electric-blue/10">
+                    <i class="fa-solid fa-bolt mr-2"></i> Nivel: Principiantes y Técnicos
+                </div>
+                <h1 class="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-tech-yellow via-white to-electric-blue leading-tight mb-4 tracking-tight">
+                    GUÍA BÁSICA DEL <br> <span class="glow-text text-white">MULTÍMETRO DIGITAL</span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-300 font-medium">
+                    Aprende a medir voltaje, continuidad, resistencia y corriente de forma <span class="text-tech-green font-bold">segura</span> y <span class="text-electric-blue font-bold">precisa</span>.
+                </p>
+            </header>
+
+            <!-- 2 & 3. IMAGEN CENTRAL Y PARTES -->
+            <section class="relative flex justify-center items-center mb-16 py-10">
+                <!-- Etiquetas Izquierda -->
+                <div class="absolute left-0 top-[10%] flex flex-col gap-12 z-20 hidden sm:flex">
+                    <div class="glass-label px-4 py-2 rounded-r-lg border-l-4 border-l-electric-blue text-sm font-bold shadow-lg transform -translate-x-2 hover:translate-x-0 transition">
+                        PANTALLA DIGITAL <br><span class="text-xs text-gray-400 font-normal">Lectura de medición</span>
+                    </div>
+                    <div class="glass-label px-4 py-2 rounded-r-lg border-l-4 border-l-tech-yellow text-sm font-bold shadow-lg transform -translate-x-2 hover:translate-x-0 transition mt-10">
+                        SELECTOR <br><span class="text-xs text-gray-400 font-normal">Giro de funciones</span>
+                    </div>
+                </div>
+
+                <!-- Multímetro SVG Hiperrealista -->
+                <div class="relative w-64 h-auto drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)] z-10 transform hover:scale-105 transition duration-500">
+                    <svg viewBox="0 0 200 400" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                        <!-- Carcasa protectora amarilla -->
+                        <rect x="5" y="5" width="190" height="390" rx="25" fill="#facc15" stroke="#ca8a04" stroke-width="2"/>
+                        <!-- Cuerpo negro -->
+                        <rect x="15" y="15" width="170" height="370" rx="15" fill="#1f2937" stroke="#111827" stroke-width="3"/>
+                        <!-- Pantalla Marco -->
+                        <rect x="30" y="35" width="140" height="70" rx="5" fill="#374151" stroke="#000" stroke-width="2"/>
+                        <!-- Pantalla LCD -->
+                        <rect x="35" y="40" width="130" height="60" rx="3" fill="#8ba888" class="lcd-screen"/>
+                        <!-- Texto Pantalla -->
+                        <text x="155" y="85" font-family="'Rajdhani', monospace" font-size="40" font-weight="bold" fill="#111827" text-anchor="end">12.04</text>
+                        <text x="160" y="85" font-family="'Rajdhani', monospace" font-size="16" font-weight="bold" fill="#111827">V</text>
+                        <text x="45" y="55" font-family="'Rajdhani', monospace" font-size="12" font-weight="bold" fill="#111827">DC</text>
+                        
+                        <!-- Marcas alrededor del selector -->
+                        <circle cx="100" cy="200" r="65" fill="none" stroke="#4b5563" stroke-width="2" stroke-dasharray="4 6"/>
+                        <path d="M 50 170 A 50 50 0 0 1 100 140" fill="none" stroke="#ffcc00" stroke-width="4"/> <!-- V DC -->
+                        <path d="M 100 140 A 50 50 0 0 1 150 170" fill="none" stroke="#ff3333" stroke-width="4"/> <!-- V AC -->
+                        <path d="M 150 170 A 50 50 0 0 1 150 230" fill="none" stroke="#00f0ff" stroke-width="4"/> <!-- A -->
+                        <path d="M 150 230 A 50 50 0 0 1 100 260" fill="none" stroke="#00ff66" stroke-width="4"/> <!-- Cont -->
+                        <path d="M 100 260 A 50 50 0 0 1 50 230" fill="none" stroke="#a855f7" stroke-width="4"/> <!-- Res -->
+                        
+                        <!-- Iconos de marcas -->
+                        <text x="45" y="160" font-family="sans-serif" font-size="12" fill="#ffcc00" font-weight="bold">V⎓</text>
+                        <text x="140" y="160" font-family="sans-serif" font-size="12" fill="#ff3333" font-weight="bold">V~</text>
+                        <text x="160" y="210" font-family="sans-serif" font-size="12" fill="#00f0ff" font-weight="bold">A</text>
+                        <text x="125" y="270" font-family="sans-serif" font-size="14" fill="#00ff66" font-weight="bold">)))</text>
+                        <text x="60" y="270" font-family="sans-serif" font-size="12" fill="#a855f7" font-weight="bold">Ω</text>
+
+                        <!-- Selector Giratorio -->
+                        <circle cx="100" cy="200" r="45" fill="#111827" stroke="#374151" stroke-width="3"/>
+                        <circle cx="100" cy="200" r="35" fill="#1f2937"/>
+                        <!-- Indicador del selector -->
+                        <polygon points="95,200 105,200 100,160" fill="#facc15" transform="rotate(-45 100 200)"/>
+
+                        <!-- Puertos Inferiores -->
+                        <!-- 10A -->
+                        <circle cx="50" cy="330" r="15" fill="#111827" stroke="#4b5563" stroke-width="2"/>
+                        <circle cx="50" cy="330" r="8" fill="#ff3333"/>
+                        <text x="50" y="360" font-family="sans-serif" font-size="10" fill="#fff" text-anchor="middle">10A</text>
+                        
+                        <!-- COM -->
+                        <circle cx="100" cy="330" r="15" fill="#111827" stroke="#4b5563" stroke-width="2"/>
+                        <circle cx="100" cy="330" r="8" fill="#111827" stroke="#fff" stroke-width="1"/>
+                        <text x="100" y="360" font-family="sans-serif" font-size="10" fill="#fff" text-anchor="middle">COM</text>
+                        
+                        <!-- V/Ohm/mA -->
+                        <circle cx="150" cy="330" r="15" fill="#111827" stroke="#4b5563" stroke-width="2"/>
+                        <circle cx="150" cy="330" r="8" fill="#ff3333"/>
+                        <text x="150" y="360" font-family="sans-serif" font-size="10" fill="#fff" text-anchor="middle">VΩmA</text>
+
+                        <!-- Fusible (Visualización Interna Falsa) -->
+                        <rect x="70" y="115" width="60" height="10" rx="3" fill="#374151" opacity="0.5"/>
+                        <text x="100" y="123" font-family="sans-serif" font-size="8" fill="#9ca3af" text-anchor="middle">FUSE 250V</text>
+                    </svg>
+
+                    <!-- Puntas de prueba (Cables SVG) -->
+                    <svg class="absolute bottom-[-80px] left-[-20px] w-[300px] h-[100px] z-[-1] pointer-events-none" style="overflow: visible;">
+                        <!-- Cable Negro COM -->
+                        <path d="M 120 20 Q 120 80 50 150" fill="none" stroke="#111827" stroke-width="6" stroke-linecap="round"/>
+                        <path d="M 120 20 Q 120 80 50 150" fill="none" stroke="#374151" stroke-width="2" stroke-linecap="round"/>
+                        <!-- Cable Rojo V -->
+                        <path d="M 170 20 Q 170 80 250 150" fill="none" stroke="#ff3333" stroke-width="6" stroke-linecap="round"/>
+                        <path d="M 170 20 Q 170 80 250 150" fill="none" stroke="#ff6b6b" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+
+                <!-- Etiquetas Derecha -->
+                <div class="absolute right-0 bottom-[15%] flex flex-col gap-12 z-20 hidden sm:flex">
+                    <div class="glass-label px-4 py-2 rounded-l-lg border-r-4 border-r-tech-red text-sm font-bold shadow-lg transform translate-x-2 hover:translate-x-0 transition">
+                        PUERTO VΩ <br><span class="text-xs text-gray-400 font-normal">Mediciones generales</span>
+                    </div>
+                    <div class="glass-label px-4 py-2 rounded-l-lg border-r-4 border-r-gray-400 text-sm font-bold shadow-lg transform translate-x-2 hover:translate-x-0 transition mt-10">
+                        PUERTO COM <br><span class="text-xs text-gray-400 font-normal">Tierra / Común (Negro)</span>
+                    </div>
+                </div>
+
+                <!-- Etiquetas Mobile (Solo visibles en pantallas pequeñas) -->
+                <div class="w-full absolute bottom-[-40px] flex justify-between px-4 sm:hidden z-20">
+                    <span class="bg-gray-800 text-xs px-2 py-1 rounded border border-gray-600">Pantalla</span>
+                    <span class="bg-gray-800 text-xs px-2 py-1 rounded border border-gray-600">Selector</span>
+                    <span class="bg-gray-800 text-xs px-2 py-1 rounded border border-gray-600">Puertos</span>
+                </div>
+            </section>
+
+            <div class="h-16"></div> <!-- Espaciador por los cables -->
+
+            <!-- 5. COLORES DE LAS PUNTAS (Integrado visualmente) -->
+            <section class="mb-16 bg-gray-900/80 rounded-2xl p-6 border border-gray-700 glow-box-blue backdrop-blur-sm">
+                <h2 class="text-2xl font-bold text-center mb-6 uppercase tracking-wider text-white"><i class="fa-solid fa-plug text-electric-blue mr-2"></i> Conexión de Puntas</h2>
+                <div class="flex flex-col md:flex-row justify-center items-center gap-8">
+                    <!-- Punta Negra -->
+                    <div class="flex items-center gap-4 bg-black p-4 rounded-xl border border-gray-800 w-full md:w-1/2">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-gray-700 to-black border-2 border-gray-500 flex items-center justify-center shadow-lg">
+                            <div class="w-3 h-3 bg-black rounded-full"></div>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-xl text-gray-300">PUNTA NEGRA</h3>
+                            <p class="text-sm text-gray-400">Siempre va al puerto <span class="text-white font-bold bg-gray-800 px-2 py-0.5 rounded">COM</span> (Común/Tierra)</p>
+                        </div>
+                    </div>
+                    <!-- Punta Roja -->
+                    <div class="flex items-center gap-4 bg-gray-800 p-4 rounded-xl border border-tech-red/30 w-full md:w-1/2">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-tech-red to-red-900 border-2 border-red-400 flex items-center justify-center shadow-[0_0_15px_rgba(255,51,51,0.5)]">
+                            <div class="w-3 h-3 bg-white rounded-full"></div>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-xl text-tech-red">PUNTA ROJA</h3>
+                            <p class="text-sm text-gray-300">Va a <span class="text-white font-bold bg-gray-700 px-2 py-0.5 rounded">VΩmA</span> (Voltaje/Resistencia) o <span class="text-white font-bold bg-red-900/50 px-2 py-0.5 rounded border border-red-500">10A</span> (Corriente Alta)</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. FUNCIONES BÁSICAS (Grid Cards) -->
+            <section class="mb-16">
+                <h2 class="text-3xl font-black mb-8 text-center uppercase tracking-wide">
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-electric-blue to-tech-green">Funciones</span> Principales
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <!-- Voltaje DC -->
+                    <div class="bg-gray-800/60 rounded-xl p-5 border-l-4 border-l-tech-yellow hover:bg-gray-800 transition shadow-lg group relative overflow-hidden">
+                        <div class="absolute right-[-20px] top-[-20px] opacity-10 group-hover:opacity-20 transition">
+                            <i class="fa-solid fa-car-battery text-8xl text-tech-yellow"></i>
+                        </div>
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded bg-tech-yellow/20 flex items-center justify-center text-tech-yellow font-bold text-xl">V⎓</div>
+                            <h3 class="text-xl font-bold text-white">Voltaje DC (Continua)</h3>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-3">Para medir pilas, baterías de auto, cargadores de celular y placas electrónicas.</p>
+                        <div class="bg-black/50 p-2 rounded text-xs text-tech-yellow border border-tech-yellow/20">
+                            <i class="fa-solid fa-lightbulb mr-1"></i> <strong>Ejemplo:</strong> Medir una batería de 12V.
+                        </div>
+                    </div>
+
+                    <!-- Voltaje AC -->
+                    <div class="bg-gray-800/60 rounded-xl p-5 border-l-4 border-l-tech-red hover:bg-gray-800 transition shadow-lg group relative overflow-hidden">
+                        <div class="absolute right-[-20px] top-[-20px] opacity-10 group-hover:opacity-20 transition">
+                            <i class="fa-solid fa-plug-circle-bolt text-8xl text-tech-red"></i>
+                        </div>
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded bg-tech-red/20 flex items-center justify-center text-tech-red font-bold text-xl">V~</div>
+                            <h3 class="text-xl font-bold text-white">Voltaje AC (Alterna)</h3>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-3">Corriente de pared (doméstica) e industrial. Enchufes e iluminación.</p>
+                        <div class="bg-red-900/30 p-2 rounded text-xs text-red-400 border border-red-500/30">
+                            <i class="fa-solid fa-triangle-exclamation mr-1"></i> <strong>Peligro:</strong> Alto voltaje (110V - 220V). Usar con precaución.
+                        </div>
+                    </div>
+
+                    <!-- Continuidad -->
+                    <div class="bg-gray-800/60 rounded-xl p-5 border-l-4 border-l-tech-green hover:bg-gray-800 transition shadow-lg group relative overflow-hidden">
+                        <div class="absolute right-[-20px] top-[-20px] opacity-10 group-hover:opacity-20 transition">
+                            <i class="fa-solid fa-volume-high text-8xl text-tech-green"></i>
+                        </div>
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded bg-tech-green/20 flex items-center justify-center text-tech-green font-bold text-xl"><i class="fa-solid fa-wifi rotate-90"></i></div>
+                            <h3 class="text-xl font-bold text-white">Continuidad</h3>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-3">Emite un "pitido" si la corriente fluye libremente entre las puntas.</p>
+                        <div class="bg-black/50 p-2 rounded text-xs text-tech-green border border-tech-green/20">
+                            <i class="fa-solid fa-check mr-1"></i> <strong>Uso:</strong> Detectar cables rotos o fusibles quemados.
+                        </div>
+                    </div>
+
+                       <!-- Resistencia -->
+                    <div class="bg-gray-800/60 rounded-xl p-5 border-l-4 border-l-purple-500 hover:bg-gray-800 transition shadow-lg group relative overflow-hidden">
+                        <div class="absolute right-[-20px] top-[-20px] opacity-10 group-hover:opacity-20 transition">
+                            <i class="fa-solid fa-microchip text-8xl text-purple-500"></i>
+                        </div>
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded bg-purple-500/20 flex items-center justify-center text-purple-500 font-bold text-xl">Ω</div>
+                            <h3 class="text-xl font-bold text-white">Resistencia (Ohmios)</h3>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-3">Mide la oposición al paso de corriente. Esencial en electrónica de placas.</p>
+                        <div class="bg-black/50 p-2 rounded text-xs text-purple-400 border border-purple-500/20">
+                            <i class="fa-solid fa-microchip mr-1"></i> <strong>Ejemplo:</strong> Medir el valor de un resistor (ej. 10kΩ).
+                        </div>
+                    </div>
+
+                    <!-- Corriente -->
+                    <div class="bg-gray-800/60 rounded-xl p-5 border-l-4 border-l-electric-blue hover:bg-gray-800 transition shadow-lg md:col-span-2 group relative overflow-hidden">
+                        <div class="absolute right-[10%] top-[-10px] opacity-10 group-hover:opacity-20 transition">
+                            <i class="fa-solid fa-bolt text-9xl text-electric-blue"></i>
+                        </div>
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded bg-electric-blue/20 flex items-center justify-center text-electric-blue font-bold text-xl">A</div>
+                            <h3 class="text-xl font-bold text-white">Corriente / Amperaje</h3>
+                        </div>
+                        <div class="flex flex-col md:flex-row gap-4">
+                            <p class="text-gray-400 text-sm flex-1">Mide el consumo de un circuito. <strong>Importante:</strong> Se debe medir colocando el multímetro en <span class="text-white underline decoration-electric-blue">SERIE</span> con el circuito, cortando la línea, no en paralelo.</p>
+                            <div class="bg-blue-900/30 p-3 rounded text-sm text-blue-300 border border-electric-blue/30 flex-1">
+                                <i class="fa-solid fa-triangle-exclamation text-tech-yellow mr-1"></i> Requiere cambiar la punta roja al puerto <strong>10A</strong> para corrientes altas.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. PASOS BÁSICOS (Timeline) -->
+            <section class="mb-16 relative">
+                <h2 class="text-2xl font-bold text-center mb-10 text-white"><i class="fa-solid fa-list-ol text-tech-yellow mr-2"></i> 5 PASOS BÁSICOS PARA MEDIR</h2>
+                
+                <div class="relative">
+                    <!-- Línea vertical conectora -->
+                    <div class="absolute left-6 md:left-1/2 top-0 bottom-0 w-1 bg-gray-800 transform md:-translate-x-1/2"></div>
+                    
+                    <div class="space-y-8">
+                        <!-- Paso 1 -->
+                        <div class="flex flex-col md:flex-row items-center justify-between w-full relative">
+                            <div class="hidden md:block w-5/12"></div>
+                            <div class="z-10 bg-dark w-12 h-12 rounded-full border-4 border-tech-yellow text-tech-yellow font-black flex items-center justify-center text-xl shadow-[0_0_15px_rgba(255,204,0,0.5)] absolute left-0 md:left-1/2 transform md:-translate-x-1/2">1</div>
+                            <div class="w-full md:w-5/12 ml-16 md:ml-0 bg-gray-800/80 p-4 rounded-xl border border-gray-700">
+                                <h4 class="font-bold text-lg text-tech-yellow mb-1">Conectar puntas</h4>
+                                <p class="text-sm text-gray-300">Negra a COM, Roja al puerto según lo que vas a medir.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Paso 2 -->
+                        <div class="flex flex-col md:flex-row-reverse items-center justify-between w-full relative">
+                            <div class="hidden md:block w-5/12"></div>
+                            <div class="z-10 bg-dark w-12 h-12 rounded-full border-4 border-electric-blue text-electric-blue font-black flex items-center justify-center text-xl shadow-[0_0_15px_rgba(0,240,255,0.5)] absolute left-0 md:left-1/2 transform md:-translate-x-1/2">2</div>
+                            <div class="w-full md:w-5/12 ml-16 md:ml-0 bg-gray-800/80 p-4 rounded-xl border border-gray-700 text-left md:text-right">
+                                <h4 class="font-bold text-lg text-electric-blue mb-1">Elegir función</h4>
+                                <p class="text-sm text-gray-300">Gira el selector a Voltaje, Resistencia o Continuidad.</p>
+                            </div>
+                        </div>
+
+                        <!-- Paso 3 -->
+                        <div class="flex flex-col md:flex-row items-center justify-between w-full relative">
+                            <div class="hidden md:block w-5/12"></div>
+                            <div class="z-10 bg-dark w-12 h-12 rounded-full border-4 border-tech-green text-tech-green font-black flex items-center justify-center text-xl shadow-[0_0_15px_rgba(0,255,102,0.5)] absolute left-0 md:left-1/2 transform md:-translate-x-1/2">3</div>
+                            <div class="w-full md:w-5/12 ml-16 md:ml-0 bg-gray-800/80 p-4 rounded-xl border border-gray-700">
+                                <h4 class="font-bold text-lg text-tech-green mb-1">Seleccionar escala</h4>
+                                <p class="text-sm text-gray-300">Si tu multímetro no es autorango, elige el valor superior más cercano al esperado.</p>
+                            </div>
+                        </div>
+
+                        <!-- Paso 4 -->
+                        <div class="flex flex-col md:flex-row-reverse items-center justify-between w-full relative">
+                            <div class="hidden md:block w-5/12"></div>
+                            <div class="z-10 bg-dark w-12 h-12 rounded-full border-4 border-purple-500 text-purple-500 font-black flex items-center justify-center text-xl shadow-[0_0_15px_rgba(168,85,247,0.5)] absolute left-0 md:left-1/2 transform md:-translate-x-1/2">4</div>
+                            <div class="w-full md:w-5/12 ml-16 md:ml-0 bg-gray-800/80 p-4 rounded-xl border border-gray-700 text-left md:text-right">
+                                <h4 class="font-bold text-lg text-purple-400 mb-1">Medir correctamente</h4>
+                                <p class="text-sm text-gray-300">Toca con firmeza los puntos del circuito. Usa paralelo para voltaje, serie para corriente.</p>
+                            </div>
+                        </div>
+
+                        <!-- Paso 5 -->
+                        <div class="flex flex-col md:flex-row items-center justify-between w-full relative">
+                            <div class="hidden md:block w-5/12"></div>
+                            <div class="z-10 bg-dark w-12 h-12 rounded-full border-4 border-white text-white font-black flex items-center justify-center text-xl shadow-[0_0_15px_rgba(255,255,255,0.5)] absolute left-0 md:left-1/2 transform md:-translate-x-1/2">5</div>
+                            <div class="w-full md:w-5/12 ml-16 md:ml-0 bg-gray-800/80 p-4 rounded-xl border border-gray-700">
+                                <h4 class="font-bold text-lg text-white mb-1">Leer pantalla</h4>
+                                <p class="text-sm text-gray-300">Un signo negativo (-) solo indica polaridad invertida en DC (puntas al revés).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7 & 8. ERRORES Y SEGURIDAD -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+                <!-- Errores -->
+                <div class="bg-red-950/40 border border-tech-red/50 rounded-xl p-6 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-tech-red"></div>
+                    <h3 class="text-xl font-bold text-tech-red mb-4 flex items-center"><i class="fa-solid fa-triangle-exclamation mr-2 text-2xl"></i> Errores Comunes</h3>
+                    <ul class="space-y-3 text-sm text-gray-300 font-medium">
+                        <li class="flex items-start"><i class="fa-solid fa-xmark text-tech-red mt-1 mr-2"></i> <span>Medir amperaje conectando en paralelo (Causa corto y quema el fusible).</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-xmark text-tech-red mt-1 mr-2"></i> <span>Elegir una escala menor al voltaje real a medir (Muestra "1" o "OL").</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-xmark text-tech-red mt-1 mr-2"></i> <span>Cambiar el selector mientras las puntas están conectadas a energía.</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-xmark text-tech-red mt-1 mr-2"></i> <span>Medir resistencia o continuidad en un circuito energizado.</span></li>
+                    </ul>
+                </div>
+
+                <!-- Seguridad -->
+                <div class="bg-blue-950/40 border border-electric-blue/50 rounded-xl p-6 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-electric-blue"></div>
+                    <h3 class="text-xl font-bold text-electric-blue mb-4 flex items-center"><i class="fa-solid fa-shield-halved mr-2 text-2xl"></i> Tips de Seguridad</h3>
+                    <ul class="space-y-3 text-sm text-gray-300 font-medium">
+                        <li class="flex items-start"><i class="fa-solid fa-check text-electric-blue mt-1 mr-2"></i> <span><strong>NO tocar</strong> las partes metálicas de las puntas durante la medición.</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-check text-electric-blue mt-1 mr-2"></i> <span>No medir altos voltajes (>50V) si no tienes experiencia previa.</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-check text-electric-blue mt-1 mr-2"></i> <span>Revisar regularmente el estado de los cables y el fusible interno.</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-check text-electric-blue mt-1 mr-2"></i> <span>Usa equipo de protección personal (guantes aislantes) si aplica.</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 9. FOOTER / SECCIÓN FINAL -->
+            <footer class="mt-12 text-center relative py-10 border-t border-gray-800">
+                <!-- Herramientas de fondo (Iconos opacos) -->
+                <div class="absolute inset-0 flex justify-center items-center opacity-5 gap-8 pointer-events-none text-6xl">
+                    <i class="fa-solid fa-screwdriver"></i>
+                    <i class="fa-solid fa-microchip"></i>
+                    <i class="fa-solid fa-network-wired"></i>
+                    <i class="fa-solid fa-plug"></i>
+                </div>
+                
+                <h2 class="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-gray-400 to-white uppercase tracking-widest relative z-10 mb-4">
+                    Todo técnico debe saber<br>usar un multímetro
+                </h2>
+                <p class="text-tech-yellow font-bold text-lg relative z-10">
+                    <i class="fa-solid fa-bolt"></i> La práctica segura hace al maestro <i class="fa-solid fa-bolt"></i>
+                </p>
+            </footer>
+
+        </div>
+    </main>
+
+</body>
+</html>
+                          
+       
